@@ -55,15 +55,15 @@ class VigenereCipheringMachine {
 
   encrypt(message, key) {
     if (message === undefined || key === undefined) this.throwError();
-    const messageUp = message.toLocaleUpperCase();
-    const keyUp = key.padEnd(messageUp.length, key).toLocaleUpperCase();
+    const keyUp = key.padEnd(message.length, key).toLocaleUpperCase();
 
     let notLetter = 0;
     let cipherText = '';
 
     for (let i = 0; i < message.length; i++) {
+      const letter = message[i].toLocaleUpperCase();
       const indexColumn = this.letters.indexOf(keyUp[i - notLetter]);
-      const indexRow = this.letters.indexOf(messageUp[i]);
+      const indexRow = this.letters.indexOf(letter);
       if (indexRow === -1) {
         cipherText += message[i];
         notLetter++;
@@ -79,10 +79,11 @@ class VigenereCipheringMachine {
     let decodedText = '';
 
     for (let i = 0; i < encryptedMessage.length; i++) {
+      const letter = encryptedMessage[i];
       const indexColumn = this.letters.indexOf(keyUp[i - notLetter]);
-      const indexRow = this.square[indexColumn].indexOf(encryptedMessage[i]);
+      const indexRow = this.square[indexColumn].indexOf(letter);
       if (indexRow === -1) {
-        decodedText += encryptedMessage[i];
+        decodedText += letter;
         notLetter++;
       } else decodedText += this.letters[indexRow];
     }

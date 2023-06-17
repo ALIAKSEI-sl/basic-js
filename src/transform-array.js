@@ -14,9 +14,7 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function transform(arr) {
-  if (!Array.isArray(arr)) {
-    throw new Error("'arr' parameter must be an instance of the Array!");
-  }
+  if (!Array.isArray(arr)) throw new Error("'arr' parameter must be an instance of the Array!");
   const arrCopy = [...arr];
   arrCopy.forEach((elem, index) => {
     switch (elem) {
@@ -40,8 +38,7 @@ function transform(arr) {
         break;
       case '--double-prev':
         {
-          if (arrCopy[index - 1] !== undefined)
-            arrCopy[index] = arrCopy[index - 1];
+          if (arrCopy[index - 1] !== undefined) arrCopy[index] = arrCopy[index - 1];
           else arrCopy[index] = undefined;
         }
         break;
