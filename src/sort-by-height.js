@@ -16,19 +16,17 @@ function sortByHeight(arr) {
   for (let i = n; i < arr.length; i++) {
     let indexMin = i;
     for (let j = i + 1; j < arr.length; j++) {
-      if (arr[j] !== -1) {
-        if (arr[j] < arr[indexMin]) {
-          indexMin = j
-        }
+      if (arr[j] !== -1 && arr[j] < arr[indexMin]) {
+        indexMin = j;
       }
     }
-    const max = arr[i];
+    const current = arr[i];
     arr[i] = arr[indexMin];
-    arr[indexMin] = max;
+    arr[indexMin] = current;
   }
   return arr;
 }
 
 module.exports = {
-  sortByHeight
+  sortByHeight,
 };

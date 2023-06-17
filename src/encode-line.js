@@ -21,9 +21,9 @@ function encodeLine(str) {
       count = 1;
     }
   }
-  return result
+  return result;
 }
 
 module.exports = {
-  encodeLine
+  encodeLine,
 };

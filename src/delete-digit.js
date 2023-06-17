@@ -22,5 +22,5 @@ function deleteDigit(n) {
 }
 
 module.exports = {
-  deleteDigit
+  deleteDigit,
 };

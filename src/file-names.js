@@ -21,7 +21,7 @@ function renameFiles(names) {
   for (i = 0; i < names.length; i++) {
     if (array.includes(names[i])) {
       obj[names[i]]++;
-      const name = `${names[i]}(${obj[names[i]]})`
+      const name = `${names[i]}(${obj[names[i]]})`;
       array.push(name);
       obj[name] = 0;
     } else {
@@ -33,5 +33,5 @@ function renameFiles(names) {
 }
 
 module.exports = {
-  renameFiles
+  renameFiles,
 };

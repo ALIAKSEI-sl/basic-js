@@ -2,7 +2,7 @@ const { NotImplementedError } = require('../extensions/index.js');
 
 /**
  * Implement chainMaker object according to task description
- * 
+ *
  */
 const chainMaker = {
   content: '',
@@ -12,22 +12,22 @@ const chainMaker = {
   },
 
   addLink(value) {
-    if (this.content.length) {
-      this.content += `~~( ${value} )`;
-    } else {
-      this.content += `( ${value} )`;
-    }
+    this.content += this.content.length ? `~~( ${value} )` : `( ${value} )`;
     return this;
   },
 
   removeLink(position) {
-    if (!Number.isInteger(position) || (position <= 0) || position > this.getLength()) {
-      this.content = ''
+    if (
+      !Number.isInteger(position) ||
+      position <= 0 ||
+      position > this.getLength()
+    ) {
+      this.content = '';
       throw new Error("You can't remove incorrect link!");
     }
 
     const array = this.content.split('~~');
-    array.splice((position - 1), 1);
+    array.splice(position - 1, 1);
     this.content = array.join('~~');
     return this;
   },
@@ -39,11 +39,11 @@ const chainMaker = {
 
   finishChain() {
     const content = this.content;
-    this.content = ''
+    this.content = '';
     return content;
-  }
+  },
 };
 
 module.exports = {
-  chainMaker
+  chainMaker,
 };

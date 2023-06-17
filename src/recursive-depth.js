@@ -3,9 +3,9 @@ const { NotImplementedError } = require('../extensions/index.js');
 /**
  * Implement class DepthCalculator with method calculateDepth
  * that calculates deoth of nested array
- * 
+ *
  * @example
- * 
+ *
  * const depthCalc = new DepthCalculator();
  * depthCalc.calculateDepth([1, 2, 3, 4, 5]) => 1
  * depthCalc.calculateDepth([1, 2, 3, [4, 5]]) => 2
@@ -17,12 +17,10 @@ class DepthCalculator {
     let count = 1;
     let max = 0;
 
-    arr.forEach(el => {
+    arr.forEach((el) => {
       if (Array.isArray(el)) {
         const elem = this.calculateDepth(el);
-        if (elem > max) {
-          max = elem;
-        }
+        if (elem > max) max = elem;
       }
     });
     return count + max;
@@ -30,5 +28,5 @@ class DepthCalculator {
 }
 
 module.exports = {
-  DepthCalculator
+  DepthCalculator,
 };

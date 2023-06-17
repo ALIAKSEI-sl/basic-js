@@ -29,16 +29,13 @@ function getDNSStats(domains) {
     let key = '';
     for (let i = array.length - 1; i >= 0; i--) {
       key += `.${array[i]}`;
-      if(key in obj) {
-        obj[key]++;
-      } else {
-        obj[key] = 1;
-      }
+      if (key in obj) obj[key]++;
+      else obj[key] = 1;
     }
-  })
+  });
   return obj;
 }
 
 module.exports = {
-  getDNSStats
+  getDNSStats,
 };
