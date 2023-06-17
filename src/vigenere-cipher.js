@@ -54,40 +54,34 @@ class VigenereCipheringMachine {
   }
 
   encrypt(message, key) {
+    return this.crypt(message, key, 'encrypt');
+  }
+
+  decrypt(encryptedMessage, key) {
+    return this.crypt(encryptedMessage, key, 'decrypt');
+  }
+
+  crypt(message, key, str) {
     if (message === undefined || key === undefined) this.throwError();
     const keyUp = key.padEnd(message.length, key).toLocaleUpperCase();
 
     let notLetter = 0;
-    let cipherText = '';
+    let text = '';
 
     for (let i = 0; i < message.length; i++) {
-      const letter = message[i].toLocaleUpperCase();
+      const letter = str === 'encrypt' ? message[i].toLocaleUpperCase() : message[i];
       const indexColumn = this.letters.indexOf(keyUp[i - notLetter]);
-      const indexRow = this.letters.indexOf(letter);
+      const indexRow = str === 'encrypt'
+        ? this.letters.indexOf(letter)
+        : this.square[indexColumn].indexOf(letter);
       if (indexRow === -1) {
-        cipherText += message[i];
+        text += str === 'encrypt' ? message[i] : letter;
         notLetter++;
-      } else cipherText += this.square[indexColumn][indexRow];
+      } else text += str === 'encrypt'
+        ? this.square[indexColumn][indexRow]
+        : this.letters[indexRow];
     }
-    return this.direct ? cipherText : cipherText.split('').reverse().join('');
-  }
-
-  decrypt(encryptedMessage, key) {
-    if (encryptedMessage === undefined || key === undefined) this.throwError();
-    const keyUp = key.padEnd(encryptedMessage.length, key).toLocaleUpperCase();
-    let notLetter = 0;
-    let decodedText = '';
-
-    for (let i = 0; i < encryptedMessage.length; i++) {
-      const letter = encryptedMessage[i];
-      const indexColumn = this.letters.indexOf(keyUp[i - notLetter]);
-      const indexRow = this.square[indexColumn].indexOf(letter);
-      if (indexRow === -1) {
-        decodedText += letter;
-        notLetter++;
-      } else decodedText += this.letters[indexRow];
-    }
-    return this.direct ? decodedText : decodedText.split('').reverse().join('');
+    return this.direct ? text : text.split('').reverse().join('');
   }
 
   throwError() {
