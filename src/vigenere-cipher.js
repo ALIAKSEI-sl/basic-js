@@ -50,7 +50,7 @@ class VigenereCipheringMachine {
       'Y',
       'Z',
     ];
-    this.square = this.createSquare();
+    this.square = this.createMatrix();
   }
 
   encrypt(message, key) {
@@ -93,10 +93,10 @@ class VigenereCipheringMachine {
     throw new Error('Incorrect arguments!');
   }
 
-  createSquare() {
+  createMatrix() {
     const matrix = [];
 
-    for (let i = 0; i < this.letters.length; i++) {
+    this.letters.forEach((_, i) => {
       matrix.push([]);
       for (let j = 0; j < this.letters.length; j++) {
         const z = this.letters.length - i;
@@ -104,7 +104,7 @@ class VigenereCipheringMachine {
           ? matrix[i].push(this.letters[j + i])
           : matrix[i].push(this.letters[j - z]);
       }
-    }
+    })
     return matrix;
   }
 }

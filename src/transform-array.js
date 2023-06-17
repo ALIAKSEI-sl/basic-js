@@ -22,36 +22,27 @@ function transform(arr) {
     switch (elem) {
       case '--discard-next':
         {
-          if (arrCopy[index + 1] !== undefined) {
-            arrCopy[index + 1] = undefined;
-          }
+          if (arrCopy[index + 1] !== undefined) arrCopy[index + 1] = undefined;
           arrCopy[index] = undefined;
         }
         break;
       case '--discard-prev':
         {
-          if (arrCopy[index - 1] !== undefined) {
-            arrCopy[index - 1] = undefined;
-          }
+          if (arrCopy[index - 1] !== undefined) arrCopy[index - 1] = undefined;
           arrCopy[index] = undefined;
         }
         break;
       case '--double-next':
         {
-          if (arrCopy[index + 1] !== undefined) {
-            arrCopy[index] = arrCopy[index + 1];
-          } else {
-            arrCopy[index] = undefined;
-          }
+          if (arrCopy[index + 1] !== undefined) arrCopy[index] = arrCopy[index + 1];
+          else arrCopy[index] = undefined;
         }
         break;
       case '--double-prev':
         {
-          if (arrCopy[index - 1] !== undefined) {
+          if (arrCopy[index - 1] !== undefined)
             arrCopy[index] = arrCopy[index - 1];
-          } else {
-            arrCopy[index] = undefined;
-          }
+          else arrCopy[index] = undefined;
         }
         break;
     }
